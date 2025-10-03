@@ -18,7 +18,7 @@ def split_dataset(selected_features=None):
         y,
         test_size=0.3,
         random_state=28,
-        stratify=y,
+        stratify=y, # garante que a divisão dos dados em conjuntos de treino e teste mantenha a mesma proporção de cada classe que existia no conjunto de dados original
     )
 
     return X_train, X_test, y_train, y_test
