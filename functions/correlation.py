@@ -28,5 +28,4 @@ def show_pearson_correlation(X, y, savePng=False):
         plt.savefig("correlation", dpi=300) 
 
     plt.show()
-
         
