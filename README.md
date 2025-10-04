@@ -162,6 +162,11 @@ Os resultados dos experimentos indicam que a variável **`ram`** é extremamente
 
 ## Como Rodar
 
+Na pasta **`dataset`** estão os arquivos utilizados no projeto:
+
+- **`mobile_price_classification_dataset.csv`** – Base de dados principal contendo os atributos dos celulares e a variável-alvo `price_range`.  
+- **`variable_info.txt`** – Descrição das variáveis e seus significados, utilizada como referência para interpretação dos dados.
+
 O código principal do projeto está no arquivo **`main.ipynb`**. Ele depende de três funções auxiliares definidas na pasta `functions`:  
 
 - **`correlation.py`** – Funções para cálculo e plot da matriz de correlação.  
