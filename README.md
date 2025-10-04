@@ -38,4 +38,26 @@ Abaixo está a matriz de correlação entre as variáveis:
 
 ![Matriz de Correlação](results/correlation.png)
 
+## Metodologia
+
+1. **Divisão da base de dados**  
+   - Foi realizada utilizando `train_test_split` com 70% dos dados para o conjunto de treinamento e fazendo uso do parâmetro `stratify=y`, garantindo a preservação da proporção das classes na separação entre treino e teste.  
+
+2. **Pré-processamento**  
+   - Aplicado **StandardScaler** para normalização dos atributos, melhorando a estabilidade numérica e o desempenho dos algoritmos de classificação.  
+
+3. **Definição do Modelo MLP**  
+   - O classificador escolhido foi um **MLP (Multilayer Perceptron)** definido de forma empírica, após experimentação de diferentes configurações:  
+
+```python
+mlp = MLPClassifier(
+    hidden_layer_sizes=(4),  # melhor desempenho usando todos os atributos
+    activation='tanh',       # função de ativação com melhor resultado
+    solver='adam',
+    alpha=0.001,
+    learning_rate='adaptive',
+    max_iter=2000,           # abaixo de 1000 gera warning de não convergência
+    random_state=28,         # semente fixa
+    verbose=False
+)
 
