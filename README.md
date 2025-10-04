@@ -60,4 +60,111 @@ mlp = MLPClassifier(
     random_state=28,         # semente fixa
     verbose=False
 )
+```
+## Experimentos
+Fiz 5 experimentos usando diferentes combinações de atributos de acordo com a matriz de correlação
 
+### Primeiro experimento
+Aqui, usei todos os 20 atributos para classificar a categoria de preço do celular.
+
+![Matriz de confusão](results/all_attributes/conf_matrix.png)
+
+![Curva ROC](results/all_attributes/roc_curve.png)
+
+| Class         | Precision | Recall   | F1-score |
+|---------------|-----------|----------|----------|
+| 0             | 0.986395  | 0.966667 | 0.976431 |
+| 1             | 0.941558  | 0.966667 | 0.953947 |
+| 2             | 0.959459  | 0.946667 | 0.953020 |
+| 3             | 0.973510  | 0.980000 | 0.976744 |
+| **Macro Avg** | 0.965231  | 0.965000 | 0.965036 |
+
+**Model Accuracy:** 96.5%
+
+---
+### Segundo experimento
+Aqui, usei os atributos `battery_power`, `ram`, `px_height`, `px_width` durante o treinamento do modelo
+
+![Matriz de confusão](results/ram_bat_pxH_pxW/conf_matrix.png)
+
+![Curva ROC](results/ram_bat_pxH_pxW/roc_curve.png)
+
+| Class        | Precision | Recall   | F1-score |
+|--------------|-----------|----------|----------|
+| 0            | 0.986207  | 0.953333 | 0.969492 |
+| 1            | 0.935484  | 0.966667 | 0.950820 |
+| 2            | 0.950000  | 0.886667 | 0.917241 |
+| 3            | 0.912500  | 0.973333 | 0.941935 |
+| **Macro Avg**| 0.946048  | 0.945000 | 0.944872 |
+
+**Model Accuracy:** 94.5%
+
+---
+### Terceiro experimento
+Aqui, usei os atributos `battery_power` e `ram` durante o treinamento do modelo
+
+![Matriz de confusão](results/ram_battery/conf_matrix.png)
+
+![Curva ROC](results/ram_battery/roc_curve.png)
+
+| Class        | Precision | Recall   | F1-score |
+|--------------|-----------|----------|----------|
+| 0            | 0.893333  | 0.893333 | 0.893333 |
+| 1            | 0.760274  | 0.740000 | 0.750000 |
+| 2            | 0.745098  | 0.760000 | 0.752475 |
+| 3            | 0.887417  | 0.893333 | 0.890365 |
+| **Macro Avg**| 0.821531  | 0.821667 | 0.821544 |
+
+**Model Accuracy:** 82.2%
+
+---
+### Quarto experimento
+Aqui, usei apenas o atributo `ram` durante o treinamento do modelo visto que ele possui uma correlação de 0.91 com a variável alvo
+
+![Matriz de confusão](results/only_ram/conf_matrix.png)
+
+![Curva ROC](results/only_ram/roc_curve.png)
+
+| Class        | Precision | Recall   | F1-score |
+|--------------|-----------|----------|----------|
+| 0            | 0.823899  | 0.873333 | 0.847896 |
+| 1            | 0.704545  | 0.620000 | 0.659574 |
+| 2            | 0.691781  | 0.673333 | 0.682432 |
+| 3            | 0.828221  | 0.900000 | 0.862620 |
+| **Macro Avg**| 0.762112  | 0.766667 | 0.763131 |
+
+**Model Accuracy:** 76.7%
+
+---
+### Quinto experimento
+Para o quinto e último experimento, usei todos os atributos exceto a `ram` para avaliar se o modelo manteria um bom desempenho apenas com os atributos de menor correlação.
+
+![Matriz de confusão](results/all_minus_ram/conf_matrix.png)
+
+![Curva ROC](results/all_minus_ram/roc_curve.png)
+
+| Class        | Precision | Recall   | F1-score |
+|--------------|-----------|----------|----------|
+| 0            | 0.340782  | 0.406667 | 0.370821 |
+| 1            | 0.261194  | 0.233333 | 0.246479 |
+| 2            | 0.261261  | 0.193333 | 0.222222 |
+| 3            | 0.335227  | 0.393333 | 0.361963 |
+| **Macro Avg**| 0.299616  | 0.306667 | 0.300371 |
+
+**Model Accuracy:** 30.7%
+
+## Conclusões
+
+Os resultados dos experimentos indicam que a variável **`ram`** é extremamente relevante para a predição do preço dos celulares na base utilizada.  
+
+- Nos **quatro primeiros experimentos**, nos quais `ram` foi incluída como atributo, o modelo apresentou desempenho **bom a muito bom**, com uma boa acurácia e métricas de precisão, recall e F1-score consistentes entre as classes.  
+- No **quinto experimento**, onde todos os atributos foram utilizados **exceto `ram`**, o desempenho do modelo caiu drasticamente, com acurácia aproximada de 31% e métricas de classificação muito baixas, demonstrando que os atributos restantes, com menor correlação com a variável-alvo, não são suficientes para uma predição confiável.  
+
+## Como Rodar
+
+O código principal do projeto está no arquivo **`main.ipynb`**. Ele depende de três funções auxiliares definidas na pasta `functions`:  
+
+- **`correlation.py`** – Funções para cálculo e plot da matriz de correlação.  
+- **`roc_curve.py`** – Funções para geração das curvas ROC por classe.  
+- **`split_dataset.py`** – Funções para divisão da base com estratificação.
+  
