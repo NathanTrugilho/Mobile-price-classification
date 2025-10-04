@@ -61,6 +61,16 @@ mlp = MLPClassifier(
     verbose=False
 )
 ```
+
+### Validação Cruzada
+Todos os experimentos foram avaliados utilizando **K-Fold Cross Validation** com **5 folds**.  
+Essa abordagem garante que cada exemplo da base de dados seja utilizado tanto para treino quanto para teste, aumentando a robustez das métricas obtidas.
+
+```python
+# K-Fold Cross Validation com 5 folds
+kf = KFold(n_splits=5, shuffle=True, random_state=28)
+```
+
 ## Experimentos
 Fiz 5 experimentos usando diferentes combinações de atributos de acordo com a matriz de correlação
 
