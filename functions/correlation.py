@@ -11,7 +11,7 @@ def show_pearson_correlation(X, y, savePng=False):
 
     plt.figure(figsize=(12, 10))
 
-    mask = np.triu(np.ones_like(matriz_corr, dtype=bool), k=1)
+    mask = np.triu(np.ones_like(matriz_corr, dtype=bool), k=1) # Faz com que a matriz fique triangular
 
     sns.heatmap(
         matriz_corr,
