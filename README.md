@@ -68,7 +68,18 @@ Essa abordagem garante que cada exemplo da base de dados seja utilizado tanto pa
 
 ```python
 # K-Fold Cross Validation com 5 folds
-kf = KFold(n_splits=5, shuffle=True, random_state=28)
+    kf = KFold(n_splits=5, shuffle=True, random_state=28)
+    scores = []
+    for train_index, val_index in kf.split(X_train):
+        X_tr, X_val = X_train[train_index], X_train[val_index]
+        y_tr, y_val = y_train.iloc[train_index], y_train.iloc[val_index]
+    
+        mlp.fit(X_tr, y_tr)
+        y_pred = mlp.predict(X_val)
+        scores.append(accuracy_score(y_val, y_pred))
+    
+    print("Acuracias em cada fold:", scores)
+    print("Acuracia média (validacao):", np.mean(scores))
 ```
 
 ## Experimentos
