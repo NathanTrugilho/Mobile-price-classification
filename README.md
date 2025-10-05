@@ -79,7 +79,7 @@ Essa abordagem garante que cada exemplo da base de dados seja utilizado tanto pa
         scores.append(accuracy_score(y_val, y_pred))
     
     print("Acuracias em cada fold:", scores)
-    print("Acuracia média (validacao):", np.mean(scores))
+    print("Acuracia media (validacao):", np.mean(scores))
 ```
 
 ## Experimentos
